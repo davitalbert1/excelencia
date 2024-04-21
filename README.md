@@ -1,32 +1,70 @@
-                                                                  *****Instruções*****
+# Getting Started with Create React App
 
-1)utilize o seguinte link para fazer o download do NODE.JS: https://nodejs.org/en/download
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-2)inicie o CMD e use o comando "para entrar na pasta onde se encontram os itens desta atividade".
+## Available Scripts
 
-3)crie o diretório usando o seguinte comando: "npx create-react-app my-react-app".
+In the project directory, you can run:
 
-4)entre na pasta criada no item anterior com "cd my-react-app".
+### `npm start`
 
-5)ultilize o comando "npm start"
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-6)use este comando para definir o local da pasta onde a atividade se encontra: "npm config set prefix C:\path\to\desired\directory", substituindo as palavras "path", "to", "desired" e "directory"com o caminho da pasta.
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-7)instale o banco de dados JSON usando seguinte comando: npm install -g json-server
+### `npm test`
 
-8)ultilize este comando para definir a porta localhost: npx json-server --watch db.json --port 3001
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-9)instale axios usando seguinte comando: "npm install axios" ou "yarn add axios" se preferir.
+### `npm run build`
 
-                                                                  *****Explicação*****
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-Link do canal do CHATGPT usado para auxilio na atividade: https://chat.openai.com/share/2c106dad-3e13-41b8-b53e-2b03349da352
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-A função readItems é responsável por ler todos os itens JSON encontrados no banco de dados e mostrando na tela para o usuário poder ver itens previamente inseridos, sendo chamada ao carregar a página.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-A função createItem é responsável pela criação de novos elementos nos itens de acordo com os inputs do usuário, chamando a função readItems.
+### `npm run eject`
 
-A função UpdateItem é responsável por editar elementos de acordo com os inputs prévios do usuário. Esta função deleta o item da lista mostrada na tela e preenche os campos do item nos inputs, possibilitando o usuário alterar estes valores, depois clicando no botão "salvar" para inserir o item editado na lista exibida na tela, após isso chamando a função readItems.
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-A função DeleteItem é responsável por deletar elementos de acordo com os inputs prévios do usuário, deletando o item usando o index dentro do array, chamando a função readItems após isso e atualizando a página.
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
