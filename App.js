@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import {
+  TextField,
+  Button,
+  Checkbox,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton,
+  List,
+} from '@mui/material';
 
 const App = () => {
   const [tarefa, setTarefa] = useState('');
@@ -12,16 +22,18 @@ const App = () => {
     readItems();
   }, []);
 
+  //cria itens e insere na lista
   const createItem = async () => {
    try {
       const newItem = { tarefa, prioridade, data, concluida };
       await axios.post('http://localhost:3001/items', newItem);
-      readItems(); // Atualiza a lista de itens após a criação bem-sucedida
+      readItems(); // chama a função readItems para atualizar a lista
     } catch (error) {
       console.error('Erro ao criar item:', error);
     }
   };
 
+  //"pega" os itens do armazenamento local e mostra eles na tela
   const readItems = async () => {
     try {
       const response = await axios.get('http://localhost:3001/items');
@@ -31,22 +43,24 @@ const App = () => {
     }
   };
 
+  // encontra itens na lista, atualiza componentes retorna eles
   const updateItem = async (index, updatedItemData) => {
     try {
-      const itemId = items[index].id; // Supondo que cada item tenha um ID único
+      const itemId = items[index].id;
       await axios.put(`http://localhost:3001/items/${itemId}`, updatedItemData);
       const updatedItems = [...items];
-      updatedItems[index] = { ...updatedItemData, id: itemId }; // Atualiza os dados localmente
+      updatedItems[index] = { ...items[index], ...updatedItemData }; // verifica os itens alterados e atualiza somente eles
       setItems(updatedItems);
     } catch (error) {
       console.error('Erro ao atualizar item:', error);
     }
-  };
+  };  
   
 
+  //encontra itens na lista e deleta eles
   const deleteItem = async (index) => {
     try {
-      const itemId = items[index].id; // Supondo que cada item tenha um ID único
+      const itemId = items[index].id; // se baseia no id do item
       await axios.delete(`http://localhost:3001/items/${itemId}`);
       const updatedItems = [...items];
       updatedItems.splice(index, 1);
@@ -56,38 +70,63 @@ const App = () => {
     }
   };
 
+  //verifica se a checkbox está "marcada" ou não
   const toggleConcluida = (index) => {
     const updatedItems = [...items];
     updatedItems[index].concluida = !updatedItems[index].concluida;
     setItems(updatedItems);
+  
+    // Salvando no armazenamento local
     localStorage.setItem('items', JSON.stringify(updatedItems));
   };
   
-
+  
+//cria o FrontEnd com o MOi e mostra na tela
   return (
     <div className="App">
-      <h2>CRUD Excelência</h2>
+      <img src="https://media.licdn.com/dms/image/C4D0BAQFVzD21blm4rQ/company-logo_200_200/0/1677695284039/excelenciainteligencia_financeira_logo?e=1721865600&v=beta&t=-JLoh51huzw01ZYbi6BzTn1OkldsosG2IAp1liquIpA" alt="Logo da Excelência Inteligência Financeira"></img>
+      <h2> Gerenciador de tarefas</h2>
 
-      <input type="text" value={tarefa} onChange={(e) => setTarefa(e.target.value)} placeholder="Tarefa" />
-      <input type="text" value={prioridade} onChange={(e) => setPrioridade(e.target.value)} placeholder="Prioridade" />
-      <input type="date" value={data} onChange={(e) => setData(e.target.value)} placeholder="Data" />
-      <input type="checkbox" value={concluida} onChange={(e) => setConcluido(e.target.value)} placeholder="concluida" />
+      <TextField
+        label="Tarefa"
+        value={tarefa}
+        onChange={(e) => setTarefa(e.target.value)}
+      />
+      <TextField
+        label="Prioridade"
+        value={prioridade}
+        onChange={(e) => setPrioridade(e.target.value)}
+      />
+      <TextField
+        label="Data"
+        type="date"
+        value={data}
+        onChange={(e) => setData(e.target.value)}
+      />
+      <Checkbox
+        checked={concluida}
+        onChange={(e) => setConcluido(e.target.checked)}
+      />
 
-      <button onClick={createItem}>Criar</button>
-      <button onClick={readItems}>Ler</button>
+      <Button variant="contained" onClick={createItem}>Criar</Button>
+      <Button variant="contained" onClick={createItem}>Ler</Button>
 
       <ul>
         {items.map((item, index) => (
-          <li key={index}>
-            {item.tarefa} - Prioridade: {item.prioridade} - Data: {item.data} -       
-            <input
-              type="checkbox"
-              checked={item.concluida}
-              onChange={() => toggleConcluida(index)}
-            />
-            <button onClick={() => deleteItem(index)}>Excluir</button>
-            <button onClick={() => updateItem(index, item)}>Editar</button>
-          </li>
+          <ListItem key={index}>
+          <Checkbox
+            checked={item.concluida}
+            onChange={() => toggleConcluida(index)}
+          />
+          <ListItemText
+            primary={item.tarefa}
+            secondary={`Prioridade: ${item.prioridade}, Data: ${item.data}`}
+          />
+          <ListItemSecondaryAction>
+            <IconButton onClick={() => deleteItem(index)}>Excluir</IconButton>
+            <IconButton onClick={() => updateItem(index, item)}>Editar</IconButton>
+          </ListItemSecondaryAction>
+        </ListItem>
         ))}
       </ul>
     </div>
